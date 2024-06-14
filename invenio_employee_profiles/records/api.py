@@ -18,7 +18,7 @@ class GetRecordResolver(object):
         """Initialize resolver."""
         self._record_cls = record_cls
 
-    def resolve(self, pid_value, registered_only):
+    def resolve(self, pid_value, registered_only=False):
         """Simply get the record."""
         _ = registered_only
         return self._record_cls.get_record(pid_value)

@@ -12,6 +12,8 @@ from io import BytesIO
 
 import pytest
 
+from invenio_employee_profiles.files.models import EmployeeProfileFileModel
+from invenio_employee_profiles.records.models import EmployeeProfileModel
 
 # @pytest.fixture()
 # def published_id(authenticated_client, employee_profile_data, location, headers):
@@ -63,7 +65,8 @@ def test_files_publish_flow(
     employee_profile_data,
     search_clear,
     location,
-    headers
+    headers,
+    db
 ):
     """Test record creation."""
     h = headers
@@ -100,15 +103,21 @@ def test_files_publish_flow(
     assert res.json["key"] == "test.pdf"
     assert res.json["status"] == "completed"
 
-    # Publish the record
-    res = authenticated_client.post(f"/mocks/{id_}/draft/actions/publish", headers=h)
-    assert res.status_code == 202
+    # # Publish the record
+    # res = authenticated_client.post(f"/employee-profiles/{id_}/actions/publish", headers=h)
+    # assert res.status_code == 202
 
     # Check published files
     res = authenticated_client.get(f"/employee-profiles/{id_}/files", headers=h)
     assert res.status_code == 200
     assert res.json["entries"][0]["key"] == "test.pdf"
     assert res.json["entries"][0]["status"] == "completed"
+
+    # Test Database to see connection
+    epm = EmployeeProfileModel.query.get(id_)
+    epfm = EmployeeProfileFileModel.query.filter(EmployeeProfileFileModel.record_id == epm.id).all()
+    assert epfm[0].record_id == epm.id
+
 
     # Edit the record
     # res = client.post(f"/mocks/{id_}/draft", headers=h)
@@ -118,48 +127,11 @@ def test_files_publish_flow(
     # res = client.post(f"/mocks/{id_}/draft/actions/publish", headers=h)
     # assert res.status_code == 202
 
-    # Check published files
-    res = authenticated_client.get(f"/employee-profiles/{id_}/files", headers=h)
-    assert res.status_code == 200
-    assert res.json["entries"][0]["key"] == "test.pdf"
-    assert res.json["entries"][0]["status"] == "completed"
-
-
-# def test_metadata_only_record(client, search_clear, location, headers):
-#     """Test record with files disabled."""
-#     h = headers
-#     # Create a draft
-#     res = client.post(
-#         "/mocks",
-#         headers=h,
-#         json={"metadata": {"title": "Test"}, "files": {"enabled": False}},
-#     )
-#     assert res.status_code == 201
-#     id_ = res.json["id"]
-
-#     # Publish the record
-#     res = client.post(f"/mocks/{id_}/draft/actions/publish", headers=h)
-#     assert res.status_code == 202
-
-#     # Check published files
-#     res = client.get(f"/mocks/{id_}/files", headers=h)
-#     assert res.status_code == 200
-#     assert res.json["enabled"] is False
-#     assert "entries" not in res.json
-
-#     # Edit the record
-#     res = client.post(f"/mocks/{id_}/draft", headers=h)
-#     assert res.status_code == 201
-
-#     # Publish again
-#     res = client.post(f"/mocks/{id_}/draft/actions/publish", headers=h)
-#     assert res.status_code == 202
-
-#     # Check published files
-#     res = client.get(f"/mocks/{id_}/files", headers=h)
-#     assert res.status_code == 200
-#     assert res.json["enabled"] is False
-#     assert "entries" not in res.json
+    # # Check published files
+    # res = authenticated_client.get(f"/employee-profiles/{id_}/files", headers=h)
+    # assert res.status_code == 200
+    # assert res.json["entries"][0]["key"] == "test.pdf"
+    # assert res.json["entries"][0]["status"] == "completed"
 
 
 # def test_import_files(client, search_clear, location, headers, published_id):

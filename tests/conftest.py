@@ -9,8 +9,6 @@
 
 """Pytest configuration."""
 
-import shutil
-import tempfile
 from invenio_app.factory import create_api
 import pytest
 from flask_principal import Identity, Need, UserNeed
@@ -23,7 +21,6 @@ from invenio_users_resources.services.schemas import (
     NotificationPreferences,
     UserPreferencesSchema,
 )
-from invenio_files_rest.models import Bucket, FileInstance, Location
 from invenio_users_resources.proxies import current_users_service
 from flask_security import login_user
 from invenio_accounts.testutils import login_user_via_session
@@ -32,19 +29,19 @@ from invenio_accounts.testutils import login_user_via_session
 pytest_plugins = ("celery.contrib.pytest",)
 
 
-@compiles(DropTable, "postgresql")
-def _compile_drop_table(element, compiler, **kwargs):
-    return compiler.visit_drop_table(element) + " CASCADE"
+# @compiles(DropTable, "postgresql")
+# def _compile_drop_table(element, compiler, **kwargs):
+#     return compiler.visit_drop_table(element) + " CASCADE"
 
 
-@compiles(DropConstraint, "postgresql")
-def _compile_drop_constraint(element, compiler, **kwargs):
-    return compiler.visit_drop_constraint(element) + " CASCADE"
+# @compiles(DropConstraint, "postgresql")
+# def _compile_drop_constraint(element, compiler, **kwargs):
+#     return compiler.visit_drop_constraint(element) + " CASCADE"
 
 
-@compiles(DropSequence, "postgresql")
-def _compile_drop_sequence(element, compiler, **kwargs):
-    return compiler.visit_drop_sequence(element) + " CASCADE"
+# @compiles(DropSequence, "postgresql")
+# def _compile_drop_sequence(element, compiler, **kwargs):
+#     return compiler.visit_drop_sequence(element) + " CASCADE"
 
 @pytest.fixture(scope="module")
 def create_app(instance_path, entry_points):
@@ -70,6 +67,14 @@ def app_config(app_config):
     app_config["ACCOUNTS_USER_PREFERENCES_SCHEMA"] = UserPreferencesNotificationsSchema
 
     app_config["USERS_RESOURCES_GROUPS_ENABLED"] = True
+
+    # Define files storage class list
+    app_config["FILES_REST_STORAGE_CLASS_LIST"] = {
+        "L": "Local",
+        "F": "Fetch",
+        "R": "Remote",
+    }
+    app_config["FILES_REST_DEFAULT_STORAGE_CLASS"] = "L"
 
     return app_config
 
