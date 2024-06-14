@@ -78,7 +78,7 @@ def test_files_publish_flow(
     })
     assert res.status_code == 201
     id_ = res.json["id"]
-
+    print(id_)
     # Initialize files upload
     res = authenticated_client.post(
         f"/employee-profiles/{id_}/files", headers=h, json=[{"key": "test.pdf"}]
