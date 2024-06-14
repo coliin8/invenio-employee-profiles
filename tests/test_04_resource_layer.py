@@ -1,6 +1,7 @@
 def test_resource(app, db, users, search_clear, search, employee_profile_data, location, authenticated_client):
     u, data = employee_profile_data
 
+    # Create
     with authenticated_client.post('/employee-profiles', json={
         **data,
         'active': True,
@@ -22,3 +23,27 @@ def test_resource(app, db, users, search_clear, search, employee_profile_data, l
               'username': 'pubres'
             }
         }.items()
+        id_ = response.json['id']
+
+    with authenticated_client.get(f'/employee-profiles/{id_}') as response:
+        assert response.status_code == 200
+
+    # Update Record
+    data["email_address"] = "jakecollins1976@gmail.com"
+    with authenticated_client.put(f'/employee-profiles/{id_}', json={
+        **data,
+        'active': True,
+        'user': {
+            'id': str(u.id),
+        }
+    }) as response:
+        assert response.json["email_address"] == "jakecollins1976@gmail.com"
+        assert response.status_code == 200
+
+    # Delete Record
+    with authenticated_client.delete(f'/employee-profiles/{id_}') as response:
+        assert response.status_code == 204
+
+    # No Longer exists
+    with authenticated_client.get(f'/employee-profiles/{id_}') as response:
+        assert response.status_code == 404

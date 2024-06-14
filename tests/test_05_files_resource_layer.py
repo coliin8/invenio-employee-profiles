@@ -103,10 +103,6 @@ def test_files_publish_flow(
     assert res.json["key"] == "test.pdf"
     assert res.json["status"] == "completed"
 
-    # # Publish the record
-    # res = authenticated_client.post(f"/employee-profiles/{id_}/actions/publish", headers=h)
-    # assert res.status_code == 202
-
     # Check published files
     res = authenticated_client.get(f"/employee-profiles/{id_}/files", headers=h)
     assert res.status_code == 200
