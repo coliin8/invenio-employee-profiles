@@ -74,20 +74,6 @@ def app_config(app_config):
     return app_config
 
 
-# @pytest.yield_fixture()
-# def dummy_location(db):
-#     """File system location."""
-#     tmppath = tempfile.mkdtemp()
-
-#     loc = Location(name="testloc", uri=tmppath, default=True)
-#     db.session.add(loc)
-#     db.session.commit()
-
-#     yield loc
-
-#     shutil.rmtree(tmppath)
-
-
 @pytest.fixture(scope="module")
 def testapp(base_app, database):
     """Application with just a database.
@@ -177,4 +163,14 @@ def employee_profile_data(users):
                          "particularly with Python and Django. He has a passion for clean, efficient code "
                          "and enjoys working on complex, challenging problems.",
             'profile_image': 'https://example.com/johndoe.png',
+            "files": {"enabled": False},
         }
+
+
+@pytest.fixture()
+def headers():
+    """Default headers for making requests."""
+    return {
+        "content-type": "application/json",
+        "accept": "application/json",
+    }

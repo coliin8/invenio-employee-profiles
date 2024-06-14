@@ -8,4 +8,4 @@ class EmployeeProfileFileResourceConfig(FileResourceConfig, ConfiguratorMixin):
     """EmployeeProfileFile resource config."""
 
     blueprint_name = "employee-profiles-files"
-    url_prefix = "/employee-profiles-files/<pid_value>"
+    url_prefix = "/employee-profiles/<pid_value>"

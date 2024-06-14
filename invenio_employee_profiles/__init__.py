@@ -71,7 +71,7 @@ in this example we use an in-memory SQLite database by default):
 """
 # from .ext import EmployeeProfileExtension
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 __all__ = (
 #    "EmployeeProfileExtension",
