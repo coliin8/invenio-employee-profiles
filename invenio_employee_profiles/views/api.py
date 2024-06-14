@@ -17,6 +17,9 @@ def init(state):
     sregistry.register(
         ext.records_service, service_id=ext.records_service.config.service_id
     )
+    sregistry.register(
+        ext.records_service.files, service_id=ext.records_service.files.config.service_id
+    )
 
     # Register indexer
     if hasattr(ext.records_service, "indexer"):

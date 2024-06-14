@@ -78,7 +78,6 @@ def test_files_publish_flow(
     })
     assert res.status_code == 201
     id_ = res.json["id"]
-    print(id_)
     # Initialize files upload
     res = authenticated_client.post(
         f"/employee-profiles/{id_}/files", headers=h, json=[{"key": "test.pdf"}]
@@ -101,9 +100,9 @@ def test_files_publish_flow(
     assert res.json["key"] == "test.pdf"
     assert res.json["status"] == "completed"
 
-    # # Publish the record
-    # res = client.post(f"/mocks/{id_}/draft/actions/publish", headers=h)
-    # assert res.status_code == 202
+    # Publish the record
+    res = authenticated_client.post(f"/mocks/{id_}/draft/actions/publish", headers=h)
+    assert res.status_code == 202
 
     # Check published files
     res = authenticated_client.get(f"/employee-profiles/{id_}/files", headers=h)
