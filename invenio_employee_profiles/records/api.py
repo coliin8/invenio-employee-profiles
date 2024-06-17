@@ -61,11 +61,12 @@ class EmployeeProfile(Record):
 
     user_id = ModelField("user_id")
 
+    # Employee Profile File related fields
     files = FilesField(file_cls=EmployeeProfileFile, store=False)
-
     bucket_id = ModelField(dump=False)
     bucket = ModelField(dump=False)
 
+    # Relationships to other models
     relations = RelationsField(
         user=ModelRelation(
             UserAggregate,

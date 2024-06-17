@@ -21,8 +21,6 @@ from sqlalchemy_utils.types import UUIDType
 class EmployeeProfileModel(db.Model, RecordMetadataBase):
     __tablename__ = "employee_profiles"
 
-    id = db.Column(UUIDType, primary_key=True, default=uuid.uuid4)
-
     @declared_attr
     def user_id(cls):
         """Foreign key to the related user."""
@@ -37,4 +35,3 @@ class EmployeeProfileModel(db.Model, RecordMetadataBase):
     # kept here for easy searching
     active = db.Column(db.Boolean(name="active"))
     """Flag to say if the Employee Profile is active or not ."""
-
