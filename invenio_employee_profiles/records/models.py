@@ -12,6 +12,7 @@ import uuid
 
 from invenio_accounts.models import User
 from invenio_db import db
+from invenio_files_rest.models import Bucket
 from invenio_records.models import RecordMetadataBase
 from invenio_records_resources.records.models import FileRecordModelMixin
 from sqlalchemy.ext.declarative import declared_attr
@@ -35,3 +36,9 @@ class EmployeeProfileModel(db.Model, RecordMetadataBase):
     # kept here for easy searching
     active = db.Column(db.Boolean(name="active"))
     """Flag to say if the Employee Profile is active or not ."""
+
+    bucket_id = db.Column(UUIDType, db.ForeignKey(Bucket.id), index=True)
+    bucket = db.relationship(Bucket, foreign_keys=[bucket_id])
+
+    media_bucket_id = db.Column(UUIDType, db.ForeignKey(Bucket.id), index=True)
+    media_bucket = db.relationship(Bucket, foreign_keys=[media_bucket_id])

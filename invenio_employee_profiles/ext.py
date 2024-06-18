@@ -13,6 +13,7 @@ from .services import (
     EmployeeProfileFileServiceConfig,
     EmployeeProfileFileService
 )
+from . import config
 
 
 class EmployeeProfileExtension:
@@ -78,7 +79,9 @@ class EmployeeProfileExtension:
 
     def init_config(self, app):
         """Setup Extension config."""
-        # ....
-        pass
+        # Override configuration variables with the values in this package.
+        for k in dir(config):
+            if k.startswith("EMPLOYEE_PROFILE_"):
+                app.config.setdefault(k, getattr(config, k))
 
     # endregion
