@@ -2,8 +2,7 @@ from invenio_administration.views.base import (
     AdminResourceListView,
     AdminResourceCreateView,
     AdminResourceEditView,
-    AdminResourceDetailView,
-    AdminResourceDeleteView
+    AdminResourceDetailView
 )
 
 
