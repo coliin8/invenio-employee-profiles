@@ -28,5 +28,4 @@ class EmployeeProfileService(RecordService):
     @property
     def files(self):
         """Record files service."""
-        print(type(self._files))
         return self._files

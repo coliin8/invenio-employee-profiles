@@ -65,6 +65,8 @@ class EmployeeProfile(Record):
     files = FilesField(file_cls=EmployeeProfileFile, store=False)
     bucket_id = ModelField(dump=False)
     bucket = ModelField(dump=False)
+    media_bucket_id = ModelField(dump=False)
+    media_bucket = ModelField(dump=False)
 
     # Relationships to other models
     relations = RelationsField(
