@@ -8,6 +8,7 @@
 # details.
 """Employee Profile service configuration."""
 
+from invenio_i18n import gettext as _
 from sqlalchemy import asc, desc
 
 from invenio_records_resources.services.records import RecordServiceConfig
