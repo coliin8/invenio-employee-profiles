@@ -106,7 +106,7 @@ def api_finalize_app(app):
 def init(app):
 
     sregistry = app.extensions["invenio-employee-profiles"].registry
-    ext = app.extensions["invenio-employee-profiles"]
+    ext = app.extensions["invenio-rdm-records"]
     service_id = ext.records_service.config.service_id
 
     # register service
