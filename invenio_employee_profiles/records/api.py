@@ -51,8 +51,8 @@ class EmployeeProfile(Record):
 
     # Systemfields
     index = IndexField(
-        "invenio_employee_profiles-employee-profile-v1.0.0",
-        search_alias="invenio_employee_profiles",
+        "employeeprofiles-employeeprofile-v1.0.0",
+        search_alias="employeeprofiles",
     )
 
     pid = DirectIdPID()

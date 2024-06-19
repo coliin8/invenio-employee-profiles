@@ -45,7 +45,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = "invenio-Employee-Profiles"
+project = "Invenio-Employee-Profiles"
 copyright = "2015-2024 CERN"
 author = "CERN"
 

@@ -69,11 +69,9 @@ in this example we use an in-memory SQLite database by default):
 >>> db.create_all()
 
 """
-# from .ext import EmployeeProfileExtension
 
-__version__ = "0.0.2"
+__version__ = "0.0.14"
 
 __all__ = (
-#    "EmployeeProfileExtension",
     "__version__",
 )

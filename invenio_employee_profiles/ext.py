@@ -85,3 +85,37 @@ class EmployeeProfileExtension:
                 app.config.setdefault(k, getattr(config, k))
 
     # endregion
+
+
+def finalize_app(app):
+    """Finalize app.
+
+    NOTE: replace former @record_once decorator
+    """
+    init(app)
+
+
+def api_finalize_app(app):
+    """Finalize app for api.
+
+    NOTE: replace former @record_once decorator
+    """
+    init(app)
+
+
+def init(app):
+    ext = app.extensions["invenio-employee-profiles"]
+    service_id = ext.records_service.config.service_id
+    file_service_id = ext.records_service.files.config.service_id
+
+    # register service
+    sregistry = app.extensions["invenio-records-resources"].registry
+    sregistry.register(
+        ext.records_service, service_id=service_id
+    )
+    sregistry.register(
+        ext.records_service.files, service_id=file_service_id
+    )
+    # Register indexers
+    iregistry = app.extensions["invenio-indexer"].registry
+    iregistry.register(ext.records_service.indexer, indexer_id=service_id)
