@@ -85,3 +85,66 @@ class EmployeeProfileExtension:
                 app.config.setdefault(k, getattr(config, k))
 
     # endregion
+
+def finalize_app(app):
+    """Finalize app.
+
+    NOTE: replace former @record_once decorator
+    """
+    init(app)
+
+
+def api_finalize_app(app):
+    """Finalize app for api.
+
+    NOTE: replace former @record_once decorator
+    """
+    init(app)
+
+
+def init(app):
+    """Init app."""
+    # Register services - cannot be done in extension because
+    # Invenio-Records-Resources might not have been initialized.
+    sregistry = app.extensions["invenio-records-resources"].registry
+    ext = app.extensions["invenio-rdm-records"]
+    sregistry.register(ext.records_service, service_id="records")
+    sregistry.register(ext.records_service.files, service_id="files")
+    sregistry.register(ext.records_service.draft_files, service_id="draft-files")
+    sregistry.register(ext.records_media_files_service, service_id="record-media-files")
+    sregistry.register(ext.records_media_files_service.files, service_id="media-files")
+    sregistry.register(
+        ext.records_media_files_service.draft_files, service_id="draft-media-files"
+    )
+    sregistry.register(ext.oaipmh_server_service, service_id="oaipmh-server")
+    sregistry.register(ext.iiif_service, service_id="rdm-iiif")
+    # Register indexers
+    iregistry = app.extensions["invenio-indexer"].registry
+    iregistry.register(ext.records_service.indexer, indexer_id="records")
+    iregistry.register(ext.records_service.draft_indexer, indexer_id="records-drafts")
+
+
+def init(app):
+
+    sregistry = app.extensions["invenio-employee-profiles"].registry
+    ext = app.extensions["invenio-employee-profiles"]
+    service_id = ext.records_service.config.service_id
+
+    # register service
+    sregistry.register(
+        ext.records_service, service_id=service_id
+    )
+    sregistry.register(
+        ext.records_service.files, service_id=ext.records_service.files.config.service_id
+    )
+    # Register indexers
+    iregistry = app.extensions["invenio-indexer"].registry
+    iregistry.register(ext.records_service.indexer, indexer_id=service_id)
+
+    # # Register indexer
+    # if hasattr(ext.records_service, "indexer"):
+    #     iregistry = app.extensions["invenio-indexer"].registry
+    #     iregistry.register(
+    #         ext.records_service.indexer,
+    #         indexer_id=ext.records_service.config.service_id,
+    #     )

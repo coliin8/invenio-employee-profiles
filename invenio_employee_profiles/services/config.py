@@ -22,11 +22,11 @@ from .components import EmployeeProfileServiceComponent
 class EmployeeProfileServiceConfig(RecordServiceConfig, ConfiguratorMixin):
     """Employee Profile Service configuration Class."""
 
-    service_id = "employeeprofiles"
+    service_id = "employee-profiles"
     record_cls = EmployeeProfile
     schema = EmployeeProfileSchema
     permission_policy_cls = EmployeeProfilePermissionPolicy
-    indexer_queue_name = "employeeprofiles"
+    indexer_queue_name = "employee-profiles"
 
     components = [
         DataComponent,

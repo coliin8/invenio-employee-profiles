@@ -10,13 +10,13 @@ from ...services.permissions import EmployeeProfilePermissionPolicy
 class EmployeeProfileFileServiceConfig(FileServiceConfig, ConfiguratorMixin):
     """ThesesRecord service config."""
 
-    url_prefix = "/employee-profile/<pid_value>"
+    url_prefix = "/employee-profiles/<pid_value>"
 
     permission_policy_cls = EmployeeProfilePermissionPolicy
 
     record_cls = EmployeeProfile
 
-    service_id = "employee-profile-file"
+    service_id = "employee-profiles-files"
 
     components = [
         # *PermissionsPresetsConfigMixin.components,
@@ -27,13 +27,13 @@ class EmployeeProfileFileServiceConfig(FileServiceConfig, ConfiguratorMixin):
     @property
     def file_links_list(self):
         return {
-            "self": RecordLink("{+api}/employee-profile/{id}/files"),
+            "self": RecordLink("{+api}/employee-profiles/{id}/files"),
         }
 
     @property
     def file_links_item(self):
         return {
-            "commit": FileLink("{+api}/employee-profile/{id}/files/{key}/commit"),
-            "content": FileLink("{+api}/employee-profile/{id}/files/{key}/content"),
-            "self": FileLink("{+api}/employee-profile/{id}/files/{key}"),
+            "commit": FileLink("{+api}/employee-profiles/{id}/files/{key}/commit"),
+            "content": FileLink("{+api}/employee-profiles/{id}/files/{key}/content"),
+            "self": FileLink("{+api}/employee-profiles/{id}/files/{key}"),
         }
