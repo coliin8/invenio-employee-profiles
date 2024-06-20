@@ -11,13 +11,13 @@ class EmployeeProfileListView(AdminResourceListView):
 
     # api_endpoint = "/employee-profiles"
     # name = "Employee Profiles"
-    name = "employee_profile_list"
+    name = "Employee-Profiles"
     resource_config = "records_resource"
     # search_request_headers = {"Accept": "application/json"}
     title = "Employee Profiles"
     category = "Site management"
     # pid_path = "id"
-    # icon = " users"
+    icon = " users"
     # template = "invenio_rdm_records/oai-search.html"
 
     display_search = True
@@ -43,13 +43,13 @@ class EmployeeProfileCreateView(AdminResourceCreateView):
     """Configuration for Employee Profile sets create view."""
 
     name = "employee_profile_create"
-    # url = "/employee-profiles-admin/create"
+    url = "/employee-profiles/create"
     resource_config = "records_resource"
     # pid_path = "id"
     api_endpoint = "/employee-profiles"
     title = "Create Employee Profile"
 
-    list_view_name = "employee_profile_list"
+    list_view_name = "Employee-Profiles"
 
     form_fields = {
         "email_address": {"text": "Set email address", "order": 1},
@@ -64,13 +64,13 @@ class EmployeeProfileEditView(AdminResourceEditView):
     """Configuration for OAI-PMH sets edit view."""
 
     name = "employee_profile_edit"
-    # url = "/employee-profiles-admin/<pid_value>/edit"
+    url = "/employee-profiles/<pid_value>/edit"
     resource_config = "records_resource"
     # pid_path = "id"
     api_endpoint = "/employee-profiles"
     title = "Edit Employee Profile"
 
-    list_view_name = "employee_profile_list"
+    list_view_name = "Employee-Profiles"
 
     form_fields = {
         "email_address": {"text": "Set email address", "order": 1},
@@ -84,10 +84,10 @@ class EmployeeProfileEditView(AdminResourceEditView):
 class EmployeeProfileDetailView(AdminResourceDetailView):
     """Configuration for OAI-PMH sets detail view."""
 
-    # url = "/employee-profiles-admin/<pid_value>"
+    url = "/employee-profiles/<pid_value>"
     api_endpoint = "/employee-profiles"
     search_request_headers = {"Accept": "application/json"}
-    name = "Employee Profile details"
+    name = "Employee Profile Details"
     resource_config = "records_resource"
     title = "Employee Profile Details"
 
@@ -95,7 +95,7 @@ class EmployeeProfileDetailView(AdminResourceDetailView):
     display_delete = True
     display_edit = True
 
-    list_view_name = "employee_profile_list"
+    list_view_name = "Employee-Profiles"
     # pid_path = "id"
 
     form_fields = {
