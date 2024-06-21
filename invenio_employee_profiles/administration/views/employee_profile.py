@@ -9,14 +9,14 @@ from invenio_administration.views.base import (
 class EmployeeProfileListView(AdminResourceListView):
     """Configuration for Employee Profiles list view."""
 
-    # api_endpoint = "/employee-profiles"
+    api_endpoint = "/employee-profiles"
     # name = "Employee Profiles"
     name = "Employee-Profiles"
     resource_config = "records_resource"
     # search_request_headers = {"Accept": "application/json"}
     title = "Employee Profiles"
     category = "Site management"
-    # pid_path = "id"
+    pid_path = "id"
     icon = " users"
     # template = "invenio_rdm_records/oai-search.html"
 
@@ -25,7 +25,7 @@ class EmployeeProfileListView(AdminResourceListView):
     display_edit = True
 
     item_field_list = {
-        "email_address": {"text": "Set email address", "order": 1},
+        "email_address": {"text": "Email address", "order": 1},
         "created": {"text": "Created", "order": 2},
         "updated": {"text": "Updated", "order": 3},
     }
@@ -45,7 +45,7 @@ class EmployeeProfileCreateView(AdminResourceCreateView):
     name = "employee_profile_create"
     url = "/employee-profiles/create"
     resource_config = "records_resource"
-    # pid_path = "id"
+    pid_path = "id"
     api_endpoint = "/employee-profiles"
     title = "Create Employee Profile"
 
@@ -66,7 +66,7 @@ class EmployeeProfileEditView(AdminResourceEditView):
     name = "employee_profile_edit"
     url = "/employee-profiles/<pid_value>/edit"
     resource_config = "records_resource"
-    # pid_path = "id"
+    pid_path = "id"
     api_endpoint = "/employee-profiles"
     title = "Edit Employee Profile"
 
@@ -75,8 +75,8 @@ class EmployeeProfileEditView(AdminResourceEditView):
     form_fields = {
         "email_address": {"text": "Set email address", "order": 1},
         "biography": {"text": "Set biography", "order": 2},
-        "created": {"text": "Created", "order": 3},
-        "updated": {"text": "Updated", "order": 4},
+        "created": {"text": "Created", "order": 4},
+        "updated": {"text": "Updated", "order": 5},
     }
     extension_name = "invenio-employee-profiles"
 

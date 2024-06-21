@@ -19,24 +19,12 @@ EMPLOYEE_PROFILE_SORT_OPTIONS = {
         title=_("Oldest"),
         fields=["created"],
     ),
-    "version": dict(
-        title=_("Version"),
-        fields=["-versions.index"],
-    ),
-    "updated-desc": dict(
-        title=_("Recently updated"),
-        fields=["-updated"],
-    ),
-    "updated-asc": dict(
-        title=_("Least recently updated"),
-        fields=["updated"],
-    ),
 }
 """Definitions of available record sort options."""
 
 
 EMPLOYEE_PROFILE_SEARCH = {
     "facets": [],
-    "sort": ["email_address", "created", "updated"],
+    "sort": ["bestmatch", "newest", "oldest"],
 }
 """Employee Profile search configuration."""
