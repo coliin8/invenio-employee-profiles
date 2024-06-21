@@ -7,27 +7,24 @@ from invenio_i18n import lazy_gettext as _
 EMPLOYEE_PROFILE_FACETS = {}
 
 EMPLOYEE_PROFILE_SORT_OPTIONS = {
-    "name": dict(
-        title=_("Set Email Address"),
-        fields=["email_address"],
+    "bestmatch": dict(
+        title=_("Best match"),
+        fields=["_score"],  # ES defaults to desc on `_score` field
     ),
-    # "spec": dict(
-    #     title=_("Set spec"),
-    #     fields=["spec"],
-    # ),
-    "created": dict(
-        title=_("Created"),
+    "newest": dict(
+        title=_("Newest"),
+        fields=["-created"],
+    ),
+    "oldest": dict(
+        title=_("Oldest"),
         fields=["created"],
     ),
-    "updated": dict(
-        title=_("Updated"),
-        fields=["updated"],
-    ),
 }
-"""Definitions of available EMPLOYEE_PROFILE sort options. """
+"""Definitions of available record sort options."""
+
 
 EMPLOYEE_PROFILE_SEARCH = {
     "facets": [],
-    "sort": ["email_address", "created", "updated"],
+    "sort": ["bestmatch", "newest", "oldest"],
 }
 """Employee Profile search configuration."""
