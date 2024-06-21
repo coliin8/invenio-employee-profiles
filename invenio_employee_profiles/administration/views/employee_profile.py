@@ -10,7 +10,6 @@ class EmployeeProfileListView(AdminResourceListView):
     """Configuration for Employee Profiles list view."""
 
     api_endpoint = "/employee-profiles"
-    # name = "Employee Profiles"
     name = "Employee-Profiles"
     resource_config = "records_resource"
     # search_request_headers = {"Accept": "application/json"}
@@ -96,7 +95,7 @@ class EmployeeProfileDetailView(AdminResourceDetailView):
     display_edit = True
 
     list_view_name = "Employee-Profiles"
-    # pid_path = "id"
+    pid_path = "id"
 
     form_fields = {
         "email_address": {"text": "Set email address", "order": 1},
