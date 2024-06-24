@@ -27,8 +27,14 @@
 [main]
 host = https://app.transifex.com
 
-[o:inveniosoftware:p:invenio:r:nvenio_employee_profiles-messages]
+[o:inveniosoftware:p:invenio:r:invenio-employee-profiles-messages]
 file_filter = invenio_employee_profiles/translations/<lang>/LC_MESSAGES/messages.po
 source_file = invenio_employee_profiles/translations/messages.pot
+source_lang = en
+type = PO
+
+[o:inveniosoftware:p:invenio:r:invenio-employee-profiles-messages-ui]
+file_filter = invenio_employee_profiles/assets/semantic-ui/translations/invenio_employee_profiles/messages/<lang>/messages.po
+source_file = invenio_employee_profiles/assets/semantic-ui/translations/invenio_employee_profiles/translations.pot
 source_lang = en
 type = PO

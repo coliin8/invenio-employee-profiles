@@ -1,0 +1,28 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18next-conv\n"
+"mime-version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2024-06-24T15:54:02.167Z\n"
+"PO-Revision-Date: 2024-06-24T15:54:02.168Z\n"
+"Language: en\n"
+
+msgid "No communities found!"
+msgstr "No communities found!"
+
+msgid "Reset search"
+msgstr "Reset search"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Filter results"
+msgstr "Filter results"
+
+msgid "Search Employee Profiles..."
+msgstr "Search Employee Profiles..."
+
+msgid "Sort by"
+msgstr "Sort by"
