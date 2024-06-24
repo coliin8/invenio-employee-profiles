@@ -6,7 +6,7 @@ from invenio_employee_profiles.resources.config import (
 
 
 EMPLOYEE_PROFILE_ROUTES = {
-    "search": "/employee-profiles/search",
+    "search": "/employee-profiles",
 }
 
 #
