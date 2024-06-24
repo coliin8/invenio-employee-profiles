@@ -21,7 +21,7 @@ def search_app_context():
             config_name="EMPLOYEE_PROFILE_SEARCH",
             available_facets=current_app.config["EMPLOYEE_PROFILE_FACETS"],
             sort_options=current_app.config["EMPLOYEE_PROFILE_SORT_OPTIONS"],
-            headers={"Accept": "application/vnd.inveniordm.v1+json"},
+            headers={"Accept": "application/json"},
             pagination_options=(10, 20),
             endpoint="/api/employee-profiles",
         ),
