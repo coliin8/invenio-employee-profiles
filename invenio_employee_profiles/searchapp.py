@@ -23,6 +23,6 @@ def search_app_context():
             sort_options=current_app.config["EMPLOYEE_PROFILE_SORT_OPTIONS"],
             headers={"Accept": "application/vnd.inveniordm.v1+json"},
             pagination_options=(10, 20),
-            endpoint="/api/employee_profiles",
+            endpoint="/api/employee-profiles",
         ),
     }
