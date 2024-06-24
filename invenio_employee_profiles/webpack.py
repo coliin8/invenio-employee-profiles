@@ -19,7 +19,7 @@ You include one of the bundles in a page like the example below (using
 
 from invenio_assets.webpack import WebpackThemeBundle
 
-communities = WebpackThemeBundle(
+employee_profiles = WebpackThemeBundle(
     __name__,
     "assets",
     default="semantic-ui",
