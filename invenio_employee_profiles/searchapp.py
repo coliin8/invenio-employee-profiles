@@ -18,10 +18,11 @@ def search_app_context():
     return {
         "search_app_employee_profile_records_config": partial(
             search_app_config,
-            config_name="COMMUNITIES_RECORDS_SEARCH",
-            available_facets=current_app.config["RDM_FACETS"],
-            sort_options=current_app.config["RDM_SORT_OPTIONS"],
+            config_name="EMPLOYEE_PROFILE_SEARCH",
+            available_facets=current_app.config["EMPLOYEE_PROFILE_FACETS"],
+            sort_options=current_app.config["EMPLOYEE_PROFILE_SORT_OPTIONS"],
             headers={"Accept": "application/vnd.inveniordm.v1+json"},
             pagination_options=(10, 20),
+            endpoint="/api/employee_profiles",
         ),
     }
