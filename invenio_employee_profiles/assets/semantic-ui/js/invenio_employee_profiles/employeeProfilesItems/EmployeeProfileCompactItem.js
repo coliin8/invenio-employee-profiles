@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { CommunityCompactItemComputer } from "./CommunityCompactItemComputer";
-import { CommunityCompactItemMobile } from "./CommunityCompactItemMobile";
+import { EmployeeProfileCompactItemComputer } from "./EmployeeProfileCompactItemComputer";
+import { EmployeeProfileCompactItemMobile } from "./EmployeeProfileCompactItemMobile";
 
 export function EmployeeProfileCompactItem({
   result,

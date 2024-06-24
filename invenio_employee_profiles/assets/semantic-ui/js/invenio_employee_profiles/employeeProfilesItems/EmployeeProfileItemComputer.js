@@ -43,6 +43,6 @@ export const EmployeeProfileItemComputer = ({ result }) => {
   );
 };
 
-CommunityItemComputer.propTypes = {
+EmployeeProfileItemComputer.propTypes = {
   result: PropTypes.object.isRequired,
 };

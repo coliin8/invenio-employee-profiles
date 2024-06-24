@@ -51,11 +51,11 @@ export const EmployeeProfileItemMobile = ({ result, index }) => {
   );
 };
 
-CommunityItemMobile.propTypes = {
+EmployeeProfileItemMobile.propTypes = {
   result: PropTypes.object.isRequired,
   index: PropTypes.string,
 };
 
-CommunityItemMobile.defaultProps = {
+EmployeeProfileItemMobile.defaultProps = {
   index: null,
 };

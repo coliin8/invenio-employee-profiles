@@ -58,7 +58,7 @@ export const EmployeeProfileCompactItemComputer = ({
   );
 };
 
-CommunityCompactItemComputer.propTypes = {
+EmployeeProfileCompactItemComputer.propTypes = {
   result: PropTypes.object.isRequired,
   actions: PropTypes.node,
   extraLabels: PropTypes.node,
@@ -68,7 +68,7 @@ CommunityCompactItemComputer.propTypes = {
   isCommunityDefault: PropTypes.bool.isRequired,
 };
 
-CommunityCompactItemComputer.defaultProps = {
+EmployeeProfileCompactItemComputer.defaultProps = {
   actions: undefined,
   extraLabels: undefined,
   itemClassName: "",

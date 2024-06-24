@@ -62,7 +62,7 @@ export const EmployeeProfileCompactItemMobile = ({
   );
 };
 
-CommunityCompactItemMobile.propTypes = {
+EmployeeProfileCompactItemMobile.propTypes = {
   result: PropTypes.object.isRequired,
   extraLabels: PropTypes.node,
   itemClassName: PropTypes.string,
@@ -72,7 +72,7 @@ CommunityCompactItemMobile.propTypes = {
   isCommunityDefault: PropTypes.bool.isRequired,
 };
 
-CommunityCompactItemMobile.defaultProps = {
+EmployeeProfileCompactItemMobile.defaultProps = {
   actions: undefined,
   extraLabels: undefined,
   itemClassName: "",
