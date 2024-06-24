@@ -37,13 +37,13 @@ export const EmployeeProfileCompactItemComputer = ({
         <div>
           <div className="flex align-items-center rel-mb-1">
             <a
-              href={detailUrl || links.self_html}
+              href={links.self_html}
               className="ui small header truncate-lines-2 m-0 mr-5"
               target="_blank"
               rel="noreferrer"
               aria-label={`${email_address}`}
             >
-              {metadata.title}
+              {email_address}
             </a>
             <i className="small icon external primary" aria-hidden="true" />
           </div>

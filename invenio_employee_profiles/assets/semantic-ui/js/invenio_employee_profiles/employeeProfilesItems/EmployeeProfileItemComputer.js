@@ -28,7 +28,7 @@ export const EmployeeProfileItemComputer = ({ result }) => {
             alt=""
           />
           <div>
-            <a className="ui medium header mb-0" href={result.links.self_html}>
+            <a className="ui medium header mb-0" href={links.self_html}>
               {email_address}
             </a>
             {result.biography && (

@@ -37,7 +37,7 @@ export const EmployeeProfileCompactItemMobile = ({
 
           <div className="flex align-items-center rel-mb-1">
             <a
-              href={detailUrl || links.self_html}
+              href={links.self_html}
               className="ui small header truncate-lines-2 m-0 mr-5"
               target="_blank"
               rel="noreferrer"
