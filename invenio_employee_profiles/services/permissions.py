@@ -11,9 +11,9 @@ class EmployeeProfilePermissionPolicy(RecordPermissionPolicy):
 
     can_search = [AnyUser(), SystemProcess()]
     can_create = [AuthenticatedUser(), SystemProcess()]
+    can_update = [AuthenticatedUser(), SystemProcess()]
+    can_delete = [AuthenticatedUser(), SystemProcess()]
     can_read = [AnyUser(), SystemProcess()]
-    can_update = [AnyUser(), SystemProcess()]
-    can_delete = [AnyUser(), SystemProcess()]
     can_create_files = [AnyUser(), SystemProcess()]
     can_set_content_files = [AnyUserIfFileIsLocal(), SystemProcess()]
     can_get_content_files = [AnyUserIfFileIsLocal(), SystemProcess()]

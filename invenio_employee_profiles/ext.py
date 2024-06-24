@@ -1,17 +1,18 @@
 """Extension for Employee Profile."""
 from functools import cached_property
 
+from invenio_records_resources.services import FileService
+# from invenio_records_resources.resources import FileResource
+
 from .resources import (
     EmployeeProfileResourceConfig,
     EmployeeProfileResource,
-    EmployeeProfileFileResourceConfig,
-    EmployeeProfileFileResource
+    # EmployeeProfileFileResourceConfig
 )
 from .services import (
     EmployeeProfileService,
     EmployeeProfileServiceConfig,
-    EmployeeProfileFileServiceConfig,
-    EmployeeProfileFileService
+    EmployeeProfileFileServiceConfig
 )
 from . import config
 
@@ -40,7 +41,7 @@ class EmployeeProfileExtension:
         """Extension initialization of Service."""
         self.records_service = EmployeeProfileService(
             config=self._service_config.record,
-            files_service=EmployeeProfileFileService(self._service_config.file)
+            files_service=FileService(self._service_config.file)
         )
 
     def init_resource(self):
@@ -50,11 +51,11 @@ class EmployeeProfileExtension:
             service=self.records_service,
         )
 
-        # Record files resource
-        self.files_resource = EmployeeProfileFileResource(
-            config=self._resource_config.file,
-            service=self.records_service.files,
-        )
+        # # Record files resource
+        # self.files_resource = FileResource(
+        #     config=self._resource_config.file,
+        #     service=self.records_service.files,
+        # )
 
     # region Private Methods
 
@@ -73,7 +74,7 @@ class EmployeeProfileExtension:
         """Extension initialization of Resource configs."""
         class ResourceConfigs:
             record = EmployeeProfileResourceConfig.build(self.app)
-            file = EmployeeProfileFileResourceConfig.build(self.app)
+            # file = EmployeeProfileFileResourceConfig.build(self.app)
 
         return ResourceConfigs
 

@@ -25,23 +25,25 @@ from invenio_users_resources.proxies import current_users_service
 from flask_security import login_user
 from invenio_accounts.testutils import login_user_via_session
 
+from invenio_employee_profiles.records.api import EmployeeProfile
+
 
 pytest_plugins = ("celery.contrib.pytest",)
 
 
-# @compiles(DropTable, "postgresql")
-# def _compile_drop_table(element, compiler, **kwargs):
-#     return compiler.visit_drop_table(element) + " CASCADE"
+@compiles(DropTable, "postgresql")
+def _compile_drop_table(element, compiler, **kwargs):
+    return compiler.visit_drop_table(element) + " CASCADE"
 
 
-# @compiles(DropConstraint, "postgresql")
-# def _compile_drop_constraint(element, compiler, **kwargs):
-#     return compiler.visit_drop_constraint(element) + " CASCADE"
+@compiles(DropConstraint, "postgresql")
+def _compile_drop_constraint(element, compiler, **kwargs):
+    return compiler.visit_drop_constraint(element) + " CASCADE"
 
 
-# @compiles(DropSequence, "postgresql")
-# def _compile_drop_sequence(element, compiler, **kwargs):
-#     return compiler.visit_drop_sequence(element) + " CASCADE"
+@compiles(DropSequence, "postgresql")
+def _compile_drop_sequence(element, compiler, **kwargs):
+    return compiler.visit_drop_sequence(element) + " CASCADE"
 
 @pytest.fixture(scope="module")
 def create_app(instance_path, entry_points):
@@ -79,6 +81,43 @@ def app_config(app_config):
     return app_config
 
 
+@pytest.fixture(scope="function", autouse=True)
+def clear_cache(app):
+    current_cache.cache.clear()
+
+
+def _search_create_indexes(current_search, current_search_client):
+    """Create all registered search indexes."""
+    to_create = [
+        EmployeeProfile.index._name,
+    ]
+    # list to trigger iter
+    list(current_search.create(ignore_existing=True, index_list=to_create))
+    current_search_client.indices.refresh()
+
+
+def _search_delete_indexes(current_search):
+    """Delete all registered search indexes."""
+    to_delete = [
+         EmployeeProfile.index._name,
+    ]
+    list(current_search.delete(index_list=to_delete))
+
+
+@pytest.fixture()
+def search_clear(search):
+    """Clear search indices after test finishes (function scope).
+
+    This fixture rollback any changes performed to the indexes during a test,
+    in order to leave search in a clean state for the next test.
+    """
+    from invenio_search import current_search, current_search_client
+
+    yield search
+    _search_delete_indexes(current_search)
+    _search_create_indexes(current_search, current_search_client)
+
+
 @pytest.fixture(scope="module")
 def testapp(base_app, database):
     """Application with just a database.
@@ -101,10 +140,6 @@ class UserPreferencesNotificationsSchema(UserPreferencesSchema):
     """Schema extending preferences with notification preferences."""
 
     notifications = fields.Nested(NotificationPreferences)
-
-@pytest.fixture(scope="function", autouse=True)
-def clear_cache(app):
-    current_cache.cache.clear()
 
 
 @pytest.fixture(scope="module")
