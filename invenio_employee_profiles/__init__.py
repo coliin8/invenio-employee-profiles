@@ -70,7 +70,7 @@ in this example we use an in-memory SQLite database by default):
 
 """
 
-__version__ = "0.0.25"
+__version__ = "0.0.26"
 
 __all__ = (
     "__version__",
