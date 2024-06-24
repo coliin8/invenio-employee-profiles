@@ -10,7 +10,7 @@ import { Grid } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 export const EmployeeProfileItemComputer = ({ result }) => {
-
+  const { biography, links, email_address, id } = result;
   return (
     <Grid className="computer tablet only item community-item">
       <Grid.Column
@@ -22,18 +22,18 @@ export const EmployeeProfileItemComputer = ({ result }) => {
         <div className="flex align-items-center">
           <Image
             wrapped
-            src={result.links.logo}
+            src={links.logo}
             size="tiny"
             className="community-image rel-mr-2"
             alt=""
           />
           <div>
             <a className="ui medium header mb-0" href={result.links.self_html}>
-              {result.email_address}
+              {email_address}
             </a>
             {result.biography && (
               <p className="truncate-lines-1 text size small text-muted mt-5">
-                {result.biography}
+                {biography}
               </p>
             )}
           </div>

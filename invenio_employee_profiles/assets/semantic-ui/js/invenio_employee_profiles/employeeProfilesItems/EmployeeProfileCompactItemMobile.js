@@ -22,8 +22,7 @@ export const EmployeeProfileCompactItemMobile = ({
   detailUrl,
   isCommunityDefault,
 }) => {
-  const communityType = result.ui?.type?.title_l10n;
-  const { metadata, ui, links, access, id } = result;
+  const { biography, links, email_address, id } = result;
   return (
     <div key={id} className={`community-item mobile only ${itemClassName}`}>
       <div className="display-grid auto-column-grid no-wrap">
@@ -52,9 +51,9 @@ export const EmployeeProfileCompactItemMobile = ({
       </div>
 
       <div className="full-width">
-        {bigraphy && (
+        {biography && (
           <p className="truncate-lines-1 text size small text-muted mt-5 rel-mb-1">
-            {_truncate(bigraphy, { length: 50 })}
+            {_truncate(biography, { length: 50 })}
           </p>
         )}
       </div>

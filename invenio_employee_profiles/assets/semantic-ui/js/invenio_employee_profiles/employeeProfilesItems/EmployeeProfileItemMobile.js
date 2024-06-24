@@ -10,6 +10,7 @@ import { Grid } from "semantic-ui-react";
 import PropTypes from "prop-types";
 
 export const EmployeeProfileItemMobile = ({ result, index }) => {
+  const { biography, links, email_address } = result;
   return (
     <Grid className="mobile only item community-item">
       <Grid.Row>
@@ -21,7 +22,7 @@ export const EmployeeProfileItemMobile = ({ result, index }) => {
           <div className="flex align-items-center">
             <Image
               wrapped
-              src={result.links.logo}
+              src={links.logo}
               size="mini"
               className="community-image rel-mr-1"
               alt=""
@@ -29,20 +30,20 @@ export const EmployeeProfileItemMobile = ({ result, index }) => {
             <div>
               <a
                 className="truncate-lines-2 ui medium header m-0"
-                href={result.links.self_html}
+                href={links.self_html}
               >
-                {result.email_address}
+                {email_address}
               </a>
             </div>
           </div>
         </Grid.Column>
       </Grid.Row>
 
-      {result.biography && (
+      {biography && (
         <Grid.Row className="pt-0">
           <Grid.Column width={16} className="pl-0 pr-0">
             <p className="truncate-lines-1 text size small text-muted mt-5">
-              {result.biography}
+              {biography}
             </p>
           </Grid.Column>
         </Grid.Row>

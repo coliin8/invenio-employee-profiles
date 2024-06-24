@@ -123,6 +123,9 @@ def test_logo_flow(
     assert res.status_code == 200
     assert res.data == b"new_logo"
 
+    res = authenticated_client.get(f"/employee-profiles/{id_}")
+    print(res.json)
+    assert True == False                
     # Delete logo with unauthorized user
     with app.test_client() as anon_client:
         res = anon_client.delete(f"/employee-profiles/{id_}/logo", headers=headers)
@@ -131,6 +134,7 @@ def test_logo_flow(
     # Delete logo
     res = authenticated_client.delete(f"/employee-profiles/{id_}/logo", headers=headers)
     assert res.status_code == 204
+
 
     # Try to get deleted logo
     res = authenticated_client.get(f"/employee-profiles/{id_}/logo")

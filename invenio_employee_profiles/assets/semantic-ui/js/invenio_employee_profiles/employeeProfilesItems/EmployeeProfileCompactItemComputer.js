@@ -20,6 +20,7 @@ export const EmployeeProfileCompactItemComputer = ({
   detailUrl,
   isCommunityDefault,
 }) => {
+  const { biography, links, email_address, id } = result;
   return (
     <Item
       key={id}
