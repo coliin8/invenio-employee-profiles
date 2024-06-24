@@ -17,7 +17,7 @@ import {
   EmployeeProfilesResults,
   EmployeeProfilesSearchBarElement,
   EmployeeProfilesSearchLayout,
-  EmployeeProfilesItem,
+  EmployeeProfileItem,
   ResultsGridItemTemplate,
 } from "./";
 

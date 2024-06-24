@@ -1,6 +1,9 @@
 """Extension for Employee Profile."""
 from functools import cached_property
 
+from flask_menu import current_menu
+
+from invenio_i18n import lazy_gettext as _
 from invenio_records_resources.services import FileService
 # from invenio_records_resources.resources import FileResource
 
@@ -94,6 +97,16 @@ def finalize_app(app):
     NOTE: replace former @record_once decorator
     """
     init(app)
+    register_menus(app)
+
+
+def register_menus(app):
+    """Register community menu items."""
+    current_menu.submenu("main.employeeprofiles").register(
+        endpoint="invenio_employee_profiles.employee_profiles_search",
+        text=_("Employee Profiles"),
+        order=1,
+    )
 
 
 def api_finalize_app(app):

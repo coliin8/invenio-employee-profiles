@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { EmployeeProfileItemComputer } from "./EmployeeProfileItemComputer";
 import { EmployeeProfileItemMobile } from "./EmployeeProfileItemMobile";
 
-export function CommunityItem({ result }) {
+export function EmployeeProfileItem({ result }) {
   return (
     <>
       <EmployeeProfileItemComputer result={result} />
@@ -13,6 +13,6 @@ export function CommunityItem({ result }) {
   );
 }
 
-CommunityItem.propTypes = {
+EmployeeProfileItem.propTypes = {
   result: PropTypes.object.isRequired,
 };

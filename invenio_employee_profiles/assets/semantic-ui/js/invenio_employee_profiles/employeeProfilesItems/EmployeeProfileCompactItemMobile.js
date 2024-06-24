@@ -42,58 +42,21 @@ export const EmployeeProfileCompactItemMobile = ({
               className="ui small header truncate-lines-2 m-0 mr-5"
               target="_blank"
               rel="noreferrer"
-              aria-label={`${metadata.title} (${i18next.t("opens in new tab")})`}
+              aria-label={`${email_address}`}
             >
-              {metadata.title}
+              {email_address}
             </a>
             <i className="small icon external primary" aria-hidden="true" />
           </div>
         </div>
-
-        <div className="flex align-items-center justify-end">
-          {showPermissionLabel && (
-            <span className="rel-mr-1">
-              {ui?.permissions?.can_include_directly && (
-                <InvenioPopup
-                  popupId="direct-publish-info-popup"
-                  size="small"
-                  trigger={<Icon name="paper plane outline neutral" size="large" />}
-                  ariaLabel={i18next.t("Submission information")}
-                  content={i18next.t(
-                    "Submission to this community does not require review, and will be published immediately."
-                  )}
-                />
-              )}
-            </span>
-          )}
-          {actions}
-        </div>
       </div>
 
       <div className="full-width">
-        {metadata.description && (
+        {bigraphy && (
           <p className="truncate-lines-1 text size small text-muted mt-5 rel-mb-1">
-            {_truncate(metadata.description, { length: 50 })}
+            {_truncate(bigraphy, { length: 50 })}
           </p>
         )}
-
-        <div className="rel-mt-1">
-          {(result.access.visibility === "restricted" ||
-            communityType ||
-            extraLabels) && (
-            <>
-              <RestrictedLabel access={access.visibility} />
-              <CommunityTypeLabel type={communityType} />
-              {extraLabels}
-            </>
-          )}
-          {isCommunityDefault && (
-            <Label color="purple" size="tiny">
-              <Icon name="paint brush" />
-              {i18next.t("Branding")}
-            </Label>
-          )}
-        </div>
       </div>
     </div>
   );

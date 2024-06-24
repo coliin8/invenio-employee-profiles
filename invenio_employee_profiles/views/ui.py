@@ -76,7 +76,7 @@ def create_ui_blueprint(app):
     routes = app.config.get("EMPLOYEE_PROFILE_ROUTES")
 
     blueprint = Blueprint(
-        "invenio_communities",
+        "invenio_employee_profiles",
         __name__,
         template_folder="../templates",
         static_folder="../static",
