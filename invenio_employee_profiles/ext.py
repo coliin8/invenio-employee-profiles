@@ -1,17 +1,21 @@
 """Extension for Employee Profile."""
 from functools import cached_property
 
+from flask_menu import current_menu
+
+from invenio_i18n import lazy_gettext as _
+from invenio_records_resources.services import FileService
+# from invenio_records_resources.resources import FileResource
+
 from .resources import (
     EmployeeProfileResourceConfig,
     EmployeeProfileResource,
-    EmployeeProfileFileResourceConfig,
-    EmployeeProfileFileResource
+    # EmployeeProfileFileResourceConfig
 )
 from .services import (
     EmployeeProfileService,
     EmployeeProfileServiceConfig,
-    EmployeeProfileFileServiceConfig,
-    EmployeeProfileFileService
+    EmployeeProfileFileServiceConfig
 )
 from . import config
 
@@ -40,7 +44,7 @@ class EmployeeProfileExtension:
         """Extension initialization of Service."""
         self.records_service = EmployeeProfileService(
             config=self._service_config.record,
-            files_service=EmployeeProfileFileService(self._service_config.file)
+            files_service=FileService(self._service_config.file)
         )
 
     def init_resource(self):
@@ -50,11 +54,11 @@ class EmployeeProfileExtension:
             service=self.records_service,
         )
 
-        # Record files resource
-        self.files_resource = EmployeeProfileFileResource(
-            config=self._resource_config.file,
-            service=self.records_service.files,
-        )
+        # # Record files resource
+        # self.files_resource = FileResource(
+        #     config=self._resource_config.file,
+        #     service=self.records_service.files,
+        # )
 
     # region Private Methods
 
@@ -73,7 +77,7 @@ class EmployeeProfileExtension:
         """Extension initialization of Resource configs."""
         class ResourceConfigs:
             record = EmployeeProfileResourceConfig.build(self.app)
-            file = EmployeeProfileFileResourceConfig.build(self.app)
+            # file = EmployeeProfileFileResourceConfig.build(self.app)
 
         return ResourceConfigs
 
@@ -93,6 +97,16 @@ def finalize_app(app):
     NOTE: replace former @record_once decorator
     """
     init(app)
+    register_menus(app)
+
+
+def register_menus(app):
+    """Register community menu items."""
+    current_menu.submenu("main.employeeprofiles").register(
+        endpoint="invenio_employee_profiles.employee_profiles_search",
+        text=_("Employee Profiles"),
+        order=1,
+    )
 
 
 def api_finalize_app(app):
@@ -106,16 +120,16 @@ def api_finalize_app(app):
 def init(app):
     ext = app.extensions["invenio-employee-profiles"]
     service_id = ext.records_service.config.service_id
-    file_service_id = ext.records_service.files.config.service_id
+    # file_service_id = ext.records_service.files.config.service_id
 
     # register service
     sregistry = app.extensions["invenio-records-resources"].registry
     sregistry.register(
         ext.records_service, service_id=service_id
     )
-    sregistry.register(
-        ext.records_service.files, service_id=file_service_id
-    )
+    # sregistry.register(
+    #     ext.records_service.files, service_id=file_service_id
+    # )
     # Register indexers
     iregistry = app.extensions["invenio-indexer"].registry
     iregistry.register(ext.records_service.indexer, indexer_id=service_id)

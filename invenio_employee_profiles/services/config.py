@@ -11,8 +11,11 @@
 from invenio_i18n import gettext as _
 from sqlalchemy import asc, desc
 
+from invenio_records_resources.services import FileLink, FileServiceConfig
 from invenio_records_resources.services.records import RecordServiceConfig
 from invenio_records_resources.services.base.config import ConfiguratorMixin
+
+from invenio_employee_profiles.services.links import EPLink
 
 from .permissions import EmployeeProfilePermissionPolicy
 from .schema import EmployeeProfileSchema
@@ -78,3 +81,44 @@ class EmployeeProfileServiceConfig(RecordServiceConfig, ConfiguratorMixin):
         RelationsComponent,
         EmployeeProfileServiceComponent,
     ]
+
+    links_item = {
+        "self": EPLink("{+api}/employee-profiles/{id}"),
+        "logo": EPLink("{+api}/employee-profiles/{id}/logo"),
+    }
+
+
+class EmployeeProfileFileServiceConfig(FileServiceConfig, ConfiguratorMixin):
+    """ThesesRecord service config."""
+
+    # url_prefix = "/employee-profiles/<pid_value>"
+
+    permission_policy_cls = EmployeeProfilePermissionPolicy
+
+    record_cls = EmployeeProfile
+
+    file_links_item = {
+        "self": FileLink("{+api}/employee-profiles/{id}/logo"),
+    }
+
+    # service_id = "employee-profiles-files"
+
+    # components = [
+    #     # *PermissionsPresetsConfigMixin.components,
+    #     *FileServiceConfig.components,
+    #     DataComponent,
+    # ]
+
+    # @property
+    # def file_links_list(self):
+    #     return {
+    #         "self": RecordLink("{+api}/employee-profiles/{id}/files"),
+    #     }
+
+    # @property
+    # def file_links_item(self):
+    #     return {
+    #         "commit": FileLink("{+api}/employee-profiles/{id}/files/{key}/commit"),
+    #         "content": FileLink("{+api}/employee-profiles/{id}/files/{key}/content"),
+    #         "self": FileLink("{+api}/employee-profiles/{id}/files/{key}"),
+    #     }

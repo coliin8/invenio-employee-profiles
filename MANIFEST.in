@@ -22,7 +22,13 @@ prune docs/_build
 recursive-include docs *.bat *.py *.rst Makefile
 recursive-include .github/workflows *.yml
 recursive-include examples *.html *.py *.sh
+recursive-include invenio_employee_profiles *.html *.jinja
+recursive-include invenio_employee_profiles *.js
 recursive-include invenio_employee_profiles *.json
-recursive-include invenio_employee_profiles *.html *.mo *.po *.pot *.xml *.py
+recursive-include invenio_employee_profiles *.less
+recursive-include invenio_employee_profiles *.png
+recursive-include invenio_employee_profiles *.mo *.po *.pot *.xml
+recursive-include invenio_employee_profiles *.py
+recursive-include invenio_employee_profiles *.tpl
 recursive-include tests *.xml *.py
 include .git-blame-ignore-revs

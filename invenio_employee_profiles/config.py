@@ -1,5 +1,13 @@
 from invenio_i18n import lazy_gettext as _
 
+from invenio_employee_profiles.resources.config import (
+    employee_profile_error_handlers
+)
+
+
+EMPLOYEE_PROFILE_ROUTES = {
+    "search": "/employee-profiles",
+}
 
 #
 # Employee Profile Search configuration
@@ -28,3 +36,11 @@ EMPLOYEE_PROFILE_SEARCH = {
     "sort": ["bestmatch", "newest", "oldest"],
 }
 """Employee Profile search configuration."""
+
+
+EMPLOYEE_PROFILE_LOGO_MAX_FILE_SIZE = 10**6
+"""Employee Profile image logo size quota, in bytes."""
+
+EMPLOYEE_PROFILE_ERROR_HANDLERS = {
+    **employee_profile_error_handlers,
+}
